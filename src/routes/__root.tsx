@@ -51,11 +51,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Elias Moreau — Designer & Developer" },
-      { name: "description", content: "Portfolio of Elias Moreau, a product designer and front-end developer crafting quiet, considered digital work." },
-      { name: "author", content: "Elias Moreau" },
-      { property: "og:title", content: "Elias Moreau — Designer & Developer" },
-      { property: "og:description", content: "Portfolio of Elias Moreau, a product designer and front-end developer crafting quiet, considered digital work." },
+      { title: "Chhoeng Dyne — Software Engineer" },
+      { name: "description", content: "Portfolio of Chhoeng Dyne, a software engineer focused on Android and web development." },
+      { name: "author", content: "Chhoeng Dyne" },
+      { property: "og:title", content: "Chhoeng Dyne — Software Engineer" },
+      { property: "og:description", content: "Portfolio of Chhoeng Dyne, a software engineer focused on Android and web development." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -107,8 +107,8 @@ function Nav() {
     >
       <div className="container-x flex h-16 items-center justify-between md:h-20">
         <Link to="/" className="flex items-baseline gap-2 font-display text-lg tracking-tight">
-          <span>Elias</span>
-          <span className="text-accent">Moreau</span>
+          <span>Chhoeng</span>
+          <span className="text-accent">Dyne</span>
         </Link>
         <nav className="hidden items-center gap-10 md:flex">
           {links.map((l) => (
