@@ -14,8 +14,8 @@ function About() {
           <div className="min-w-0">
             <p className="eyebrow">Portfolio · 2026</p>
             <h1 className="mt-6 text-[clamp(3rem,9vw,7.5rem)] leading-[0.95] tracking-tighter">
-              Elias<br />
-              <span className="italic text-accent">Moreau.</span>
+              Chhoeng<br />
+              <span className="italic text-accent">Dyne.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground md:text-xl">
               Software engineer building clean Android apps and modern web
@@ -26,7 +26,7 @@ function About() {
             <div className="h-56 w-56 overflow-hidden rounded-full border border-border shadow-soft md:h-72 md:w-72">
               <img
                 src={headshotAsset.url}
-                alt="Portrait of Elias Moreau"
+                alt="Portrait of Chhoeng Dyne"
                 width={1024}
                 height={1024}
                 className="h-full w-full object-cover grayscale"

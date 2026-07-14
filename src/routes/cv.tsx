@@ -3,9 +3,9 @@ import { createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/cv")({
   head: () => ({
     meta: [
-      { title: "CV — Elias Moreau" },
-      { name: "description", content: "Education, work experience and skills of a software engineer focused on Android and web." },
-      { property: "og:title", content: "CV — Elias Moreau" },
+      { title: "CV — Chhoeng Dyne" },
+      { name: "description", content: "Education, work experience and skills of Chhoeng Dyne, a software engineer focused on Android and web." },
+      { property: "og:title", content: "CV — Chhoeng Dyne" },
       { property: "og:description", content: "Education, work experience and skills of a software engineer focused on Android and web." },
     ],
   }),

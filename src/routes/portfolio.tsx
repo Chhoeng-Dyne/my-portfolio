@@ -10,9 +10,9 @@ import p6 from "@/assets/project-6.jpg";
 export const Route = createFileRoute("/portfolio")({
   head: () => ({
     meta: [
-      { title: "Portfolio — Elias Moreau" },
-      { name: "description", content: "Selected projects: web, product design, video, and brand work." },
-      { property: "og:title", content: "Portfolio — Elias Moreau" },
+      { title: "Portfolio — Chhoeng Dyne" },
+      { name: "description", content: "Selected projects by Chhoeng Dyne: Android and web engineering work." },
+      { property: "og:title", content: "Portfolio — Chhoeng Dyne" },
       { property: "og:description", content: "Selected projects: web, product design, video, and brand work." },
     ],
   }),
