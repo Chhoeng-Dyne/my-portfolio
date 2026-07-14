@@ -123,7 +123,7 @@ function Nav() {
             </Link>
           ))}
         </nav>
-        <a href="mailto:dynechhoeng@gmail.com" className="btn-primary hidden md:inline-flex text-xs">
+        <a href="mailto:hello@eliasmoreau.com" className="btn-primary hidden md:inline-flex text-xs">
           Get in touch
         </a>
         <button
@@ -151,7 +151,7 @@ function Nav() {
                 {l.label}
               </Link>
             ))}
-            <a href="mailto:dynechhoeng@gmail.com" className="btn-primary mt-3 self-start text-xs">
+            <a href="mailto:hello@eliasmoreau.com" className="btn-primary mt-3 self-start text-xs">
               Get in touch
             </a>
           </div>
@@ -173,10 +173,10 @@ function Footer() {
               <span className="italic text-accent">making real?</span>
             </h2>
             <a
-              href="mailto:dynechhoeng@gmail.com"
+              href="mailto:hello@eliasmoreau.com"
               className="mt-8 inline-block font-display text-2xl md:text-3xl link-underline"
             >
-              dynechhoeng@gmail.com
+              hello@eliasmoreau.com
             </a>
           </div>
           <div className="grid grid-cols-2 gap-8 text-sm">
