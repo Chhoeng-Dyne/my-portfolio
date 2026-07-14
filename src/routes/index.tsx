@@ -88,7 +88,7 @@ function About() {
       {/* Marquee-style highlights */}
       <section className="border-y border-border bg-surface py-10 overflow-hidden">
         <div className="container-x flex flex-wrap items-center justify-between gap-x-12 gap-y-4 font-display text-xl md:text-2xl">
-          {["Interface Design", "Design Systems", "Front-end", "Motion", "Type & Brand"].map((t) => (
+          {["Android / Kotlin", "Jetpack Compose", "React", "Vue.js", "Node.js", "Tailwind / Bootstrap"].map((t) => (
             <span key={t} className="whitespace-nowrap">
               <span className="text-accent mr-3">✦</span>{t}
             </span>
