@@ -18,8 +18,8 @@ function About() {
               <span className="italic text-accent">Moreau.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground md:text-xl">
-              Product designer & front-end developer building thoughtful,
-              performant interfaces for teams that care about the details.
+              Software engineer building clean Android apps and modern web
+              experiences with Kotlin, Jetpack Compose, React, Vue, and Node.js.
             </p>
           </div>
           <div className="relative shrink-0">
@@ -57,19 +57,19 @@ function About() {
           </div>
           <div className="space-y-6 text-lg leading-relaxed text-foreground/85">
             <p>
-              I&rsquo;m a designer-developer hybrid working at the intersection
-              of interface craft and interaction. Over the last eight years I&rsquo;ve
-              partnered with startups and studios on everything from editorial
-              publications to enterprise dashboards.
+              I&rsquo;m a software engineer focused on Android and web development.
+              I build mobile apps with Kotlin, Jetpack Compose, and Material Design,
+              and craft responsive web apps with React, Vue.js, Node.js, Tailwind,
+              and Bootstrap.
             </p>
             <p>
-              My focus is quiet interfaces — the kind that get out of your way.
-              I care deeply about typography, motion that means something, and
-              writing accessible code that ages well.
+              My approach is practical: clean architecture, readable code, and
+              interfaces that feel fast and intuitive. I care about performance,
+              accessibility, and shipping features that actually solve problems.
             </p>
             <p>
-              When I&rsquo;m not shipping, you&rsquo;ll find me shooting 35mm film,
-              teaching a design workshop, or trying to explain why serifs matter.
+              When I&rsquo;m not coding, you&rsquo;ll find me exploring new tools,
+              refining UI patterns, or chasing down a tricky bug.
             </p>
           </div>
         </div>
@@ -88,7 +88,7 @@ function About() {
       {/* Marquee-style highlights */}
       <section className="border-y border-border bg-surface py-10 overflow-hidden">
         <div className="container-x flex flex-wrap items-center justify-between gap-x-12 gap-y-4 font-display text-xl md:text-2xl">
-          {["Interface Design", "Design Systems", "Front-end", "Motion", "Type & Brand"].map((t) => (
+          {["Android / Kotlin", "Jetpack Compose", "React", "Vue.js", "Node.js", "Tailwind / Bootstrap"].map((t) => (
             <span key={t} className="whitespace-nowrap">
               <span className="text-accent mr-3">✦</span>{t}
             </span>

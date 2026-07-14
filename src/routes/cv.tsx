@@ -4,9 +4,9 @@ export const Route = createFileRoute("/cv")({
   head: () => ({
     meta: [
       { title: "CV — Elias Moreau" },
-      { name: "description", content: "Education, work experience and skills of Elias Moreau." },
+      { name: "description", content: "Education, work experience and skills of a software engineer focused on Android and web." },
       { property: "og:title", content: "CV — Elias Moreau" },
-      { property: "og:description", content: "Education, work experience and skills of Elias Moreau." },
+      { property: "og:description", content: "Education, work experience and skills of a software engineer focused on Android and web." },
     ],
   }),
   component: CV,
@@ -49,10 +49,10 @@ const education = [
 ];
 
 const skills = {
-  Craft: ["Interface Design", "Design Systems", "Prototyping", "Typography", "Brand"],
-  Code: ["TypeScript", "React", "Tailwind", "Framer Motion", "Node.js"],
-  Tools: ["Figma", "Linear", "Notion", "After Effects", "Blender"],
-  Soft: ["Facilitation", "Writing", "Mentorship", "Cross-functional leadership"],
+  Android: ["Kotlin", "Jetpack Compose", "Material Design", "Android SDK", "Room / SQLite"],
+  Web: ["JavaScript", "React", "Vue.js", "Node.js", "Tailwind CSS", "Bootstrap"],
+  Tools: ["Android Studio", "Git", "VS Code", "Figma", "Postman"],
+  Soft: ["Problem solving", "Code review", "Mentorship", "Cross-functional collaboration"],
 };
 
 function CV() {
