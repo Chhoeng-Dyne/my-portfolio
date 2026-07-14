@@ -183,25 +183,23 @@ function Footer() {
             <div>
               <p className="eyebrow mb-4">Elsewhere</p>
               <ul className="space-y-3">
-                <li><a href="https://linkedin.com" target="_blank" rel="noreferrer" className="link-underline">LinkedIn</a></li>
-                <li><a href="https://github.com" target="_blank" rel="noreferrer" className="link-underline">GitHub</a></li>
-                <li><a href="https://dribbble.com" target="_blank" rel="noreferrer" className="link-underline">Dribbble</a></li>
-                <li><a href="https://read.cv" target="_blank" rel="noreferrer" className="link-underline">Read.cv</a></li>
+                <li><a href="https://www.linkedin.com/in/chhoeng-dyne-60646041" target="_blank" rel="noreferrer" className="link-underline">LinkedIn</a></li>
+                <li><a href="https://github.com/Chhoeng-Dyne" target="_blank" rel="noreferrer" className="link-underline">GitHub</a></li>
               </ul>
             </div>
             <div>
               <p className="eyebrow mb-4">Direct</p>
               <ul className="space-y-3">
-                <li><a href="tel:+15551234567" className="link-underline">+1 (555) 123-4567</a></li>
-                <li className="text-muted-foreground">Brooklyn, NY</li>
-                <li className="text-muted-foreground">GMT−5</li>
+                <li><a href="tel:+855886087171" className="link-underline">+(855) 886087171</a></li>
+                <li className="text-muted-foreground">Phnom Penh, Cambodia</li>
+                <li className="text-muted-foreground">GMT+7</li>
               </ul>
             </div>
           </div>
         </div>
         <div className="mt-16 flex flex-col-reverse gap-4 border-t border-border pt-8 md:flex-row md:items-center md:justify-between">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Elias Moreau. All rights reserved.
+            © {new Date().getFullYear()} Chhoeng Dyne. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground font-mono">
             Designed & built with care.
