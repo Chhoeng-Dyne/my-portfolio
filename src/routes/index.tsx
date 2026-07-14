@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import headshot from "@/assets/headshot.jpg";
+import headshotAsset from "@/assets/headshot.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: About,
@@ -25,7 +25,7 @@ function About() {
           <div className="relative shrink-0">
             <div className="h-56 w-56 overflow-hidden rounded-full border border-border shadow-soft md:h-72 md:w-72">
               <img
-                src={headshot}
+                src={headshotAsset.url}
                 alt="Portrait of Elias Moreau"
                 width={1024}
                 height={1024}
