@@ -18,8 +18,8 @@ function About() {
               <span className="italic text-accent">Moreau.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground md:text-xl">
-              Product designer & front-end developer building thoughtful,
-              performant interfaces for teams that care about the details.
+              Software engineer building clean Android apps and modern web
+              experiences with Kotlin, Jetpack Compose, React, Vue, and Node.js.
             </p>
           </div>
           <div className="relative shrink-0">
