@@ -127,16 +127,13 @@ function Portfolio() {
               </span>
             </div>
             <p className="mt-2 text-muted-foreground max-w-lg">{p.description}</p>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {p.stack.map((s) => (
-                <li key={s} className="text-[11px] font-mono text-muted-foreground">
+            <ul className="mt-3 flex flex-wrap gap-x-2 gap-y-1">
+              {p.stack.map((s, idx) => (
+                <li key={s} className="text-[11px] font-mono text-muted-foreground flex items-center gap-2">
+                  {idx > 0 && <span className="text-muted-foreground/40">·</span>}
                   {s}
                 </li>
-              )).reduce<React.ReactNode[]>((acc, el, idx, arr) => {
-                acc.push(el);
-                if (idx < arr.length - 1) acc.push(<li key={`sep-${idx}`} className="text-muted-foreground/40">·</li>);
-                return acc;
-              }, [])}
+              ))}
             </ul>
           </button>
         ))}
