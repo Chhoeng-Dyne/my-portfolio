@@ -199,7 +199,7 @@ function Footer() {
         </div>
         <div className="mt-16 flex flex-col-reverse gap-4 border-t border-border pt-8 md:flex-row md:items-center md:justify-between">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Elias Moreau. All rights reserved.
+            © {new Date().getFullYear()} Chhoeng Dyne. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground font-mono">
             Designed & built with care.
