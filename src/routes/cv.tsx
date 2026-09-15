@@ -4,32 +4,75 @@ export const Route = createFileRoute("/cv")({
   head: () => ({
     meta: [
       { title: "CV — Chhoeng Dyne" },
-      { name: "description", content: "Education, work experience and skills of Chhoeng Dyne, a software engineer focused on Android and web." },
+      {
+        name: "description",
+        content:
+          "Curriculum Vitae of Chhoeng Dyne, Software Engineering student at Limkokwing University specializing in Android, modern web, and software architecture.",
+      },
       { property: "og:title", content: "CV — Chhoeng Dyne" },
-      { property: "og:description", content: "Education, work experience and skills of a software engineer focused on Android and web." },
+      {
+        property: "og:description",
+        content:
+          "Education, coursework, technical capabilities, and resume of Chhoeng Dyne.",
+      },
     ],
   }),
   component: CV,
 });
 
-const educationAndExperience = [
+const education = [
   {
-    title: "Bachelor of Software Engineering",
-    org: "Limkokwing University of Creative Technology",
+    degree: "Bachelor of Software Engineering",
+    institution: "Limkokwing University of Creative Technology",
+    location: "Phnom Penh, Cambodia",
     period: "2024 — 2027",
+    description:
+      "Comprehensive program focused on software systems, full-stack web engineering, native mobile development, discrete mathematics, and object-oriented design.",
   },
   {
-    title: "High School Diploma",
-    org: "Dam Dek High School",
+    degree: "High School Diploma",
+    institution: "Dam Dek High School",
+    location: "Cambodia",
     period: "2018 — 2023",
+    description: "Achieved Grade B in the national/international examinations.",
   },
 ];
 
-const skills = {
-  Android: ["Kotlin", "Jetpack Compose", "Material Design", "Android SDK", "Room / SQLite"],
-  Web: ["JavaScript", "React", "Vue.js", "Node.js", "Tailwind CSS", "Bootstrap"],
-  Tools: ["Android Studio", "Git", "VS Code", "Figma", "Postman"],
-  Soft: ["Problem solving", "Code review", "Mentorship", "Cross-functional collaboration"],
+const coursework = [
+  {
+    category: "Software Engineering & Architecture",
+    courses: [
+      "Software System Architecture",
+      "Object-Oriented Analysis & Design (OOAD)",
+      "Object-Oriented Programming (OOP)",
+      "Discrete Structures & Logic",
+    ],
+  },
+  {
+    category: "Systems & Web Programming",
+    courses: [
+      "Front-End Web Programming (HTML, CSS, JavaScript)",
+      "Computer Programming 1 & 2 (C++, Data Structures, Algorithms)",
+      "Mathematics for Computing",
+      "Introduction to Information Technology",
+    ],
+  },
+  {
+    category: "Design, Graphics & Business",
+    courses: [
+      "Computer Graphics 1 & 2 (Adobe Photoshop, Adobe InDesign)",
+      "Design Creativity & Visual Layout",
+      "Communication Skills & Professional English",
+      "Introduction to Business & Management",
+    ],
+  },
+];
+
+const skillCategories = {
+  "Languages & Core": ["Dart", "Kotlin", "JavaScript", "TypeScript", "C++", "HTML5 & CSS3", "SQL / SQLite"],
+  "Frameworks & Libraries": ["Flutter", "React", "Jetpack Compose", "Vue.js", "Node.js", "Tailwind CSS", "Bootstrap"],
+  "Tools & Platforms": ["Android Studio", "Git & GitHub", "VS Code", "Postman", "Figma", "Adobe Photoshop", "Adobe InDesign"],
+  "Core Competencies": ["System Architecture", "Object-Oriented Design", "Clean Code & Testing", "Team Collaboration", "Conversational English", "Problem Solving"],
 };
 
 function CV() {
@@ -38,50 +81,121 @@ function CV() {
       {/* Header */}
       <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
         <div className="min-w-0">
-          <p className="eyebrow">Curriculum Vitae</p>
-          <h1 className="mt-4 text-6xl md:text-8xl leading-[0.95]">
-            The <span className="italic text-accent">long</span><br />form.
+          <span className="eyebrow">Curriculum Vitae</span>
+          <h1 className="mt-2 text-4xl sm:text-6xl font-bold tracking-tight text-foreground">
+            Academic &amp; professional profile.
           </h1>
+          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
+            Software engineering student at Limkokwing University, driven by clean code,
+            intuitive interface design, and scalable systems. Ready to contribute, learn,
+            and build meaningful software.
+          </p>
         </div>
-        <a href="/cv.pdf" download className="btn-primary shrink-0">
-          Download CV (PDF)
-          <span aria-hidden>↓</span>
-        </a>
+
+        <div className="flex flex-col gap-3 shrink-0 sm:flex-row md:flex-col">
+          <a
+            href="/cv.pdf"
+            download="Chhoeng_Dyne_CV.pdf"
+            className="btn-primary inline-flex items-center justify-center gap-3 text-sm px-6 py-3.5 shadow-soft"
+          >
+            <span>Download Official CV (PDF)</span>
+            <span aria-hidden className="text-base font-bold">↓</span>
+          </a>
+          <p className="text-[11px] font-mono text-muted-foreground text-center md:text-right">
+            Sen Sok, Phnom Penh · GMT+7
+          </p>
+        </div>
       </div>
 
-      {/* Education & Experience */}
+      {/* Quick Summary Strip */}
+      <div className="mt-16 grid grid-cols-2 gap-4 rounded-xl border border-border bg-surface p-6 sm:grid-cols-4 md:mt-20">
+        <div>
+          <span className="eyebrow block">Status</span>
+          <span className="mt-1 block font-medium text-foreground">Available for Internship</span>
+        </div>
+        <div>
+          <span className="eyebrow block">Degree</span>
+          <span className="mt-1 block font-medium text-foreground">B.S. Software Engineering</span>
+        </div>
+        <div>
+          <span className="eyebrow block">Specialization</span>
+          <span className="mt-1 block font-medium text-foreground">Android &amp; Modern Web</span>
+        </div>
+        <div>
+          <span className="eyebrow block">Location</span>
+          <span className="mt-1 block font-medium text-foreground">Phnom Penh, Cambodia</span>
+        </div>
+      </div>
+
+      {/* 01 · Education */}
       <section className="mt-24">
-        <div className="grid gap-6 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-16">
+        <div className="grid gap-6 md:grid-cols-[14rem_minmax(0,1fr)] md:gap-16">
           <div>
-            <p className="eyebrow">01 · Education & Experience</p>
+            <p className="eyebrow">01 · Education</p>
           </div>
-          <ol className="space-y-10">
-            {educationAndExperience.map((e) => (
-              <li key={e.title} className="grid gap-2 md:grid-cols-[minmax(0,1fr)_auto] md:items-baseline">
-                <div className="min-w-0">
-                  <h3 className="text-2xl md:text-3xl">{e.title}</h3>
-                  <p className="mt-1 text-muted-foreground">{e.org}</p>
+          <ol className="space-y-12">
+            {education.map((item) => (
+              <li key={item.degree} className="border-b border-border/60 pb-10 last:border-none last:pb-0">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+                  <h3 className="text-2xl font-display md:text-3xl text-foreground">{item.degree}</h3>
+                  <span className="font-mono text-xs text-muted-foreground shrink-0">{item.period}</span>
                 </div>
-                <p className="font-mono text-xs text-muted-foreground shrink-0 md:text-right">{e.period}</p>
+                <p className="mt-1.5 text-base font-medium text-accent">{item.institution}</p>
+                <p className="mt-1 text-xs text-muted-foreground font-mono">{item.location}</p>
+                <p className="mt-4 text-muted-foreground leading-relaxed max-w-2xl">{item.description}</p>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      {/* Skills */}
+      {/* 02 · Academic Coursework */}
       <section className="mt-24 border-t border-border pt-16">
-        <div className="grid gap-6 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-16">
-          <p className="eyebrow">02 · Skills</p>
+        <div className="grid gap-6 md:grid-cols-[14rem_minmax(0,1fr)] md:gap-16">
+          <div>
+            <p className="eyebrow">02 · Coursework</p>
+            <p className="mt-2 text-xs text-muted-foreground font-mono">
+              Key modules completed and underway at Limkokwing University
+            </p>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {coursework.map((group) => (
+              <div key={group.category} className="rounded-lg border border-border bg-surface p-5">
+                <h4 className="font-display text-base font-medium text-foreground mb-4 border-b border-border/60 pb-2">
+                  {group.category}
+                </h4>
+                <ul className="space-y-2.5 text-sm text-foreground/85">
+                  {group.courses.map((course) => (
+                    <li key={course} className="flex items-start gap-2">
+                      <span className="text-accent text-xs mt-1">✦</span>
+                      <span>{course}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 03 · Skills & Capabilities */}
+      <section className="mt-24 border-t border-border pt-16">
+        <div className="grid gap-6 md:grid-cols-[14rem_minmax(0,1fr)] md:gap-16">
+          <div>
+            <p className="eyebrow">03 · Skills</p>
+            <p className="mt-2 text-xs text-muted-foreground font-mono">
+              Technologies, libraries, design tools, and practices
+            </p>
+          </div>
           <div className="grid gap-10 sm:grid-cols-2">
-            {Object.entries(skills).map(([group, items]) => (
+            {Object.entries(skillCategories).map(([group, items]) => (
               <div key={group}>
-                <h3 className="font-display text-lg mb-4">{group}</h3>
+                <h3 className="font-display text-lg mb-4 text-foreground">{group}</h3>
                 <ul className="flex flex-wrap gap-2">
                   {items.map((s) => (
                     <li
                       key={s}
-                      className="rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-mono hover:border-foreground hover:-translate-y-0.5 transition-all"
+                      className="rounded-full border border-border bg-surface px-3.5 py-1.5 text-xs font-mono hover:border-foreground hover:-translate-y-0.5 transition-all cursor-default shadow-xs"
                     >
                       {s}
                     </li>
@@ -89,6 +203,37 @@ function CV() {
                 </ul>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 04 · Career Objective */}
+      <section className="mt-24 border-t border-border pt-16">
+        <div className="grid gap-6 md:grid-cols-[14rem_minmax(0,1fr)] md:gap-16">
+          <div>
+            <p className="eyebrow">04 · Objective</p>
+          </div>
+          <div className="rounded-xl border border-border bg-surface p-8 max-w-3xl">
+            <h3 className="font-display text-2xl mb-3 text-foreground">
+              Internship &amp; Engineering Goals
+            </h3>
+            <p className="text-base text-muted-foreground leading-relaxed">
+              Seeking an internship in software engineering, mobile (Android/Kotlin), or full-stack web
+              development. Passionate about learning cutting-edge architectures, shipping reliable features,
+              and contributing enthusiastically to high-impact engineering teams.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-4 items-center">
+              <a href="mailto:dynechhoeng@gmail.com" className="btn-primary text-xs">
+                Reach out directly →
+              </a>
+              <a
+                href="/cv.pdf"
+                download="Chhoeng_Dyne_CV.pdf"
+                className="btn-ghost text-xs"
+              >
+                Download PDF
+              </a>
+            </div>
           </div>
         </div>
       </section>

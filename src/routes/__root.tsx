@@ -10,7 +10,6 @@ import {
 import { useEffect, useState, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
   return (
@@ -28,9 +27,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center px-4">
@@ -64,7 +60,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -88,72 +84,117 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 function Nav() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+
   const links = [
     { to: "/", label: "About" },
+    { to: "/portfolio", label: "Projects" },
     { to: "/cv", label: "CV" },
-    { to: "/portfolio", label: "Portfolio" },
   ] as const;
+
   return (
-    <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "backdrop-blur-md bg-background/80 border-b border-border" : "bg-transparent"}`}
-    >
-      <div className="container-x flex h-16 items-center justify-between md:h-20">
-        <Link to="/" className="flex items-baseline gap-2 font-display text-lg tracking-tight">
-          <span>Chhoeng</span>
-          <span className="text-accent">Dyne</span>
+    <header className="sticky top-0 z-50 w-full border-b border-zinc-200/90 bg-white/95 backdrop-blur-md shadow-2xs">
+      <div className="container-x flex h-16 items-center justify-between">
+        <Link to="/" className="flex items-center gap-2.5 font-display text-base font-semibold tracking-tight text-zinc-900 group">
+          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span>Chhoeng Dyne</span>
+          <span className="hidden sm:inline-block text-xs font-mono font-normal text-zinc-500">
+            / Software Engineer
+          </span>
         </Link>
-        <nav className="hidden items-center gap-10 md:flex">
+
+        {/* Desktop Nav Pills */}
+        <nav className="hidden items-center gap-1 rounded-full border border-zinc-200 bg-zinc-50/90 p-1 md:flex shadow-2xs">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className="link-underline text-sm text-foreground/80 hover:text-foreground"
-              activeProps={{ className: "text-foreground font-medium" }}
               activeOptions={{ exact: true }}
             >
-              {l.label}
+              {({ isActive }) => (
+                <span
+                  className={`block rounded-full px-4 py-1.5 text-xs transition-all cursor-pointer ${
+                    isActive
+                      ? "bg-zinc-900 text-white font-semibold shadow-xs"
+                      : "text-zinc-600 hover:text-zinc-950 hover:bg-zinc-200/70 font-medium"
+                  }`}
+                >
+                  {l.label}
+                </span>
+              )}
             </Link>
           ))}
         </nav>
-        <a href="mailto:dynechhoeng@gmail.com" className="btn-primary hidden md:inline-flex text-xs">
-          Get in touch
-        </a>
+
+        {/* Right CTA / GitHub */}
+        <div className="hidden items-center gap-3 md:flex">
+          <a
+            href="https://github.com/Chhoeng-Dyne"
+            target="_blank"
+            rel="noreferrer"
+            className="text-zinc-600 hover:text-zinc-950 transition-colors p-2 text-xs font-mono flex items-center gap-1.5"
+          >
+            <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+            <span>GitHub</span>
+          </a>
+          <a href="mailto:dynechhoeng@gmail.com" className="btn-primary text-xs py-2 px-3.5">
+            Contact
+          </a>
+        </div>
+
+        {/* Mobile Hamburger */}
         <button
-          className="md:hidden p-2 -mr-2"
+          className="md:hidden p-2 rounded-md hover:bg-zinc-100 transition cursor-pointer"
           onClick={() => setOpen((o) => !o)}
           aria-label="Toggle menu"
         >
-          <span className="block w-6 space-y-1.5">
-            <span className={`block h-px bg-foreground transition-transform ${open ? "translate-y-[6px] rotate-45" : ""}`} />
-            <span className={`block h-px bg-foreground transition-opacity ${open ? "opacity-0" : ""}`} />
-            <span className={`block h-px bg-foreground transition-transform ${open ? "-translate-y-[6px] -rotate-45" : ""}`} />
+          <span className="block w-5 space-y-1.5">
+            <span className={`block h-0.5 bg-zinc-900 transition-transform ${open ? "translate-y-[8px] rotate-45" : ""}`} />
+            <span className={`block h-0.5 bg-zinc-900 transition-opacity ${open ? "opacity-0" : ""}`} />
+            <span className={`block h-0.5 bg-zinc-900 transition-transform ${open ? "-translate-y-[8px] -rotate-45" : ""}`} />
           </span>
         </button>
       </div>
+
+      {/* Mobile Drawer */}
       {open && (
-        <div className="md:hidden border-t border-border bg-background">
-          <div className="container-x flex flex-col py-4">
+        <div className="md:hidden border-b border-zinc-200 bg-white shadow-md">
+          <div className="container-x flex flex-col py-4 gap-2">
             {links.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
                 onClick={() => setOpen(false)}
-                className="py-3 text-lg"
+                activeOptions={{ exact: true }}
               >
-                {l.label}
+                {({ isActive }) => (
+                  <span
+                    className={`block py-2.5 px-3 rounded-lg text-sm font-medium transition ${
+                      isActive
+                        ? "bg-zinc-900 text-white font-semibold"
+                        : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950"
+                    }`}
+                  >
+                    {l.label}
+                  </span>
+                )}
               </Link>
             ))}
-            <a href="mailto:dynechhoeng@gmail.com" className="btn-primary mt-3 self-start text-xs">
-              Get in touch
-            </a>
+            <div className="pt-3 mt-1 border-t border-zinc-200 flex items-center justify-between">
+              <a
+                href="https://github.com/Chhoeng-Dyne"
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm font-medium text-zinc-600 hover:text-zinc-900"
+              >
+                GitHub ↗
+              </a>
+              <a href="mailto:dynechhoeng@gmail.com" className="btn-primary text-xs py-1.5 px-3">
+                Contact
+              </a>
+            </div>
           </div>
         </div>
       )}
@@ -163,47 +204,61 @@ function Nav() {
 
 function Footer() {
   return (
-    <footer id="contact" className="mt-32 border-t border-border bg-surface">
-      <div className="container-x py-16 md:py-24">
-        <div className="grid gap-12 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] md:gap-16">
+    <footer id="contact" className="mt-28 border-t border-border bg-surface">
+      <div className="container-x py-16">
+        <div className="grid gap-10 md:grid-cols-2 md:items-center">
           <div>
-            <p className="eyebrow">Get in touch</p>
-            <h2 className="mt-4 text-4xl md:text-6xl leading-[1.05]">
-              Have an idea worth<br />
-              <span className="italic text-accent">making real?</span>
+            <span className="eyebrow">Connect</span>
+            <h2 className="mt-2 text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+              Let&rsquo;s build something great together.
             </h2>
-            <a
-              href="mailto:dynechhoeng@gmail.com"
-              className="mt-8 inline-block font-display text-2xl md:text-3xl link-underline"
-            >
-              dynechhoeng@gmail.com
-            </a>
+            <p className="mt-2 text-sm text-muted-foreground max-w-md">
+              Available for software engineering internships, collaborative mobile apps, and modern web projects.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <a
+                href="mailto:dynechhoeng@gmail.com"
+                className="btn-primary text-xs"
+              >
+                dynechhoeng@gmail.com
+              </a>
+              <a
+                href="tel:+855886087171"
+                className="btn-ghost text-xs"
+              >
+                +(855) 886087171
+              </a>
+            </div>
           </div>
-          <div className="grid grid-cols-2 gap-8 text-sm">
-            <div>
-              <p className="eyebrow mb-4">Elsewhere</p>
-              <ul className="space-y-3">
-                <li><a href="https://www.linkedin.com/in/chhoeng-dyne-60646041" target="_blank" rel="noreferrer" className="link-underline">LinkedIn</a></li>
-                <li><a href="https://github.com/Chhoeng-Dyne" target="_blank" rel="noreferrer" className="link-underline">GitHub</a></li>
-              </ul>
+
+          <div className="flex flex-col md:items-end gap-3 text-sm">
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="https://github.com/Chhoeng-Dyne"
+                target="_blank"
+                rel="noreferrer"
+                className="text-muted-foreground hover:text-foreground font-medium transition"
+              >
+                GitHub ↗
+              </a>
+              <a
+                href="https://www.linkedin.com/in/chhoeng-dyne-60646041"
+                target="_blank"
+                rel="noreferrer"
+                className="text-muted-foreground hover:text-foreground font-medium transition"
+              >
+                LinkedIn ↗
+              </a>
             </div>
-            <div>
-              <p className="eyebrow mb-4">Direct</p>
-              <ul className="space-y-3">
-                <li><a href="tel:+855886087171" className="link-underline">+(855) 886087171</a></li>
-                <li className="text-muted-foreground">Phnom Penh, Cambodia</li>
-                <li className="text-muted-foreground">GMT+7</li>
-              </ul>
-            </div>
+            <p className="text-xs text-muted-foreground font-mono mt-2">
+              Sen Sok, Phnom Penh, Cambodia · GMT+7
+            </p>
           </div>
         </div>
-        <div className="mt-16 flex flex-col-reverse gap-4 border-t border-border pt-8 md:flex-row md:items-center md:justify-between">
-          <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Chhoeng Dyne. All rights reserved.
-          </p>
-          <p className="text-xs text-muted-foreground font-mono">
-            Designed & built with care.
-          </p>
+
+        <div className="mt-12 flex flex-col gap-3 border-t border-border/80 pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between font-mono">
+          <p>© {new Date().getFullYear()} Chhoeng Dyne. All rights reserved.</p>
+          <p>Built with TanStack Start &amp; Tailwind CSS.</p>
         </div>
       </div>
     </footer>

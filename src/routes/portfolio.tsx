@@ -1,182 +1,250 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import p1 from "@/assets/project-1.jpg";
-import p2 from "@/assets/project-2.jpg";
-import p3 from "@/assets/project-3.jpg";
-import p4 from "@/assets/project-4.jpg";
-import p5 from "@/assets/project-5.jpg";
-import p6 from "@/assets/project-6.jpg";
+import { useState } from "react";
 
 export const Route = createFileRoute("/portfolio")({
   head: () => ({
     meta: [
-      { title: "Portfolio — Chhoeng Dyne" },
-      { name: "description", content: "Selected projects by Chhoeng Dyne: Android and web engineering work." },
-      { property: "og:title", content: "Portfolio — Chhoeng Dyne" },
-      { property: "og:description", content: "Selected projects: web, product design, video, and brand work." },
+      { title: "Projects — Chhoeng Dyne" },
+      {
+        name: "description",
+        content:
+          "Engineering projects by Chhoeng Dyne: Android applications, modern web platforms, and software architecture research.",
+      },
+      { property: "og:title", content: "Projects — Chhoeng Dyne" },
+      {
+        property: "og:description",
+        content:
+          "Engineering projects: Android Kotlin apps, modern web platforms, and research reports.",
+      },
     ],
   }),
   component: Portfolio,
 });
 
-type Category = "All" | "Web" | "Design" | "Video";
+type Category = "All" | "Mobile" | "Web" | "Research";
 
 type Project = {
+  id: string;
   title: string;
   year: string;
   category: Exclude<Category, "All">;
   description: string;
   stack: string[];
-  link: string;
-  image: string;
+  link: string; // <-- PASTE YOUR GITHUB OR PDF LINK HERE
+  linkType: "github" | "pdf";
 };
 
+// =========================================================================
+// 📌 CHHOENG DYNE — FEATURED PROJECTS & RESEARCH
+// =========================================================================
 const projects: Project[] = [
-  { title: "Meridian", year: "2025", category: "Design", description: "A visual identity and print system for an independent design magazine.", stack: ["Brand", "Print", "Type"], link: "#", image: p1 },
-  { title: "Northwind Console", year: "2024", category: "Web", description: "Analytics dashboard rebuilt from the ground up — 40k active operators.", stack: ["React", "TypeScript", "D3"], link: "#", image: p2 },
-  { title: "Étoile Studio", year: "2024", category: "Web", description: "Editorial e-commerce site for a Paris-based fashion label.", stack: ["Next.js", "Shopify", "GSAP"], link: "#", image: p3 },
-  { title: "Golden Hour", year: "2023", category: "Video", description: "Short-form documentary series on independent filmmakers.", stack: ["Direction", "Edit", "Color"], link: "#", image: p4 },
-  { title: "Fern & Field", year: "2023", category: "Design", description: "Brand identity and packaging for a small-batch stationery house.", stack: ["Brand", "Packaging"], link: "#", image: p5 },
-  { title: "Bloom OS", year: "2022", category: "Web", description: "A colorful, playful mobile app for daily creative prompts.", stack: ["React Native", "Motion"], link: "#", image: p6 },
+  // --- Mobile Apps ---
+  {
+    id: "uniwiki-mobile",
+    title: "UniWiki — Mobile Campus Knowledge Hub",
+    year: "2025",
+    category: "Mobile",
+    description:
+      "Cross-platform mobile application engineered with Flutter and Dart. Serves as an interactive university wiki and knowledge-sharing platform for students to access academic resources, campus information, and community guides.",
+    stack: ["Flutter", "Dart", "Android", "Cross-Platform", "Material Design"],
+    link: "https://github.com/Chhoeng-Dyne/uniwiki",
+    linkType: "github",
+  },
+  {
+    id: "banking-mobile-app",
+    title: "Banking Mobile Application",
+    year: "2025",
+    category: "Mobile",
+    description:
+      "Comprehensive mobile banking app developed for the university final exam. Implements secure account management, transaction flows, balance tracking, and intuitive Material Design interfaces.",
+    stack: ["Android", "Kotlin", "Room Database", "Material Design", "Security"],
+    link: "https://github.com/OuThorninvithyea/Banking-Mobile-app-Final-Exam-",
+    linkType: "github",
+  },
+
+  // --- Web Applications ---
+  {
+    id: "my-blog-website",
+    title: "Personal Developer Blog Platform",
+    year: "2025",
+    category: "Web",
+    description:
+      "Modern, responsive web platform designed for publishing software development articles, engineering tutorials, and technical insights with clean typography and fast client navigation.",
+    stack: ["React", "TypeScript", "Tailwind CSS", "Markdown", "Responsive UI"],
+    link: "https://github.com/Chhoeng-Dyne/My-Blog-Website",
+    linkType: "github",
+  },
+  {
+    id: "sunsafe-project",
+    title: "SunSafe — UV Health & Weather Advisory",
+    year: "2025",
+    category: "Web",
+    description:
+      "Public health awareness web application providing real-time solar UV radiation tracking, sun safety recommendations, and localized environmental data visualization.",
+    stack: ["Web Technologies", "JavaScript", "Weather & UV APIs", "CSS3", "UX Design"],
+    link: "https://github.com/Chhoeng-Dyne/SunSafe-Project",
+    linkType: "github",
+  },
+
+  // --- Research Reports & System Architecture Documents ---
+  {
+    id: "smart-city-traffic-system",
+    title: "Smart City Traffic Management System (SCTMS)",
+    year: "2026",
+    category: "Research",
+    description:
+      "34-page software requirements engineering and architectural feasibility study under Limkokwing University. Proposes an AI-assisted adaptive traffic signal control system with IoT edge computing and emergency vehicle preemption.",
+    stack: ["Software Architecture", "IoT & Edge Computing", "UML Class/Activity Diagrams", "SRED Report", "PDF Document"],
+    link: "/projects/smart-city-traffic-management-system.pdf",
+    linkType: "pdf",
+  },
+  {
+    id: "hotel-reservation-database-system",
+    title: "Hotel Reservation Management System",
+    year: "2025",
+    category: "Research",
+    description:
+      "27-page comprehensive relational database engineering project under Limkokwing University. Features complete ERD modeling, 3NF normalization, full SQL DDL schema implementation, and multi-table analytical query evaluation.",
+    stack: ["Database Design", "ERD Modeling", "3NF Normalization", "Relational SQL", "Data Dictionary", "PDF Document"],
+    link: "/projects/hotel-reservation-database-system.pdf",
+    linkType: "pdf",
+  },
 ];
 
-const cats: Category[] = ["All", "Web", "Design", "Video"];
+const categories: Category[] = ["All", "Mobile", "Web", "Research"];
 
 function Portfolio() {
   const [filter, setFilter] = useState<Category>("All");
-  const [active, setActive] = useState<Project | null>(null);
 
   const shown = filter === "All" ? projects : projects.filter((p) => p.category === filter);
-
-  useEffect(() => {
-    if (!active) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setActive(null);
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [active]);
 
   return (
     <div className="container-x pt-12 pb-24 md:pt-20">
       {/* Header */}
       <div>
-        <p className="eyebrow">Selected Work</p>
-        <h1 className="mt-4 text-6xl md:text-8xl leading-[0.95]">
-          Things I&rsquo;ve<br />
-          <span className="italic text-accent">made.</span>
+        <span className="eyebrow">Projects</span>
+        <h1 className="mt-2 text-4xl sm:text-6xl font-bold tracking-tight text-foreground">
+          Selected engineering work.
         </h1>
-        <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-          A rotating cross-section of client work, side projects, and
-          collaborations. Tap any card for a closer look.
+        <p className="mt-4 max-w-2xl text-base sm:text-lg text-muted-foreground leading-relaxed">
+          A collection of projects covering native mobile development with Kotlin,
+          modern full-stack web applications, and software architecture research.
         </p>
       </div>
 
-      {/* Filters */}
-      <div className="mt-12 flex flex-wrap items-center gap-2 border-b border-border pb-4">
-        {cats.map((c) => {
+      {/* Category Filter Pills */}
+      <div className="mt-10 flex flex-wrap items-center gap-2 border-b border-border pb-4">
+        {categories.map((c) => {
           const isActive = c === filter;
+          const count = c === "All" ? projects.length : projects.filter((p) => p.category === c).length;
           return (
             <button
               key={c}
               onClick={() => setFilter(c)}
-              className={`rounded-full px-4 py-2 text-sm transition-all ${
+              className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-all cursor-pointer ${
                 isActive
-                  ? "bg-ink text-background"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "bg-foreground text-background shadow-xs font-semibold"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
               }`}
-              style={isActive ? { background: "var(--ink)", color: "var(--background)" } : undefined}
             >
               {c}
-              <span className="ml-2 font-mono text-[10px] opacity-60">
-                {c === "All" ? projects.length : projects.filter((p) => p.category === c).length}
+              <span className="ml-1.5 font-mono text-[11px] opacity-70">
+                ({count})
               </span>
             </button>
           );
         })}
       </div>
 
-      {/* Grid */}
-      <div className="mt-10 grid gap-x-6 gap-y-16 md:grid-cols-2">
-        {shown.map((p, i) => (
-          <button
-            key={p.title}
-            onClick={() => setActive(p)}
-            className={`group text-left ${i % 2 === 1 ? "md:mt-16" : ""}`}
-          >
-            <div className="relative overflow-hidden rounded-md bg-muted aspect-[4/3]">
-              <img
-                src={p.image}
-                alt={p.title}
-                loading="lazy"
-                width={1200}
-                height={900}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-              />
-              <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors" />
-              <div className="absolute right-4 top-4 rounded-full bg-background/90 backdrop-blur px-3 py-1 text-[10px] font-mono uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
-                View →
-              </div>
+      {/* Projects Grid or Clean Empty State */}
+      <div className="mt-8">
+        {shown.length === 0 ? (
+          <div className="rounded-2xl border border-dashed border-border bg-surface/60 p-12 text-center my-8">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-muted text-foreground/70 mb-3 text-lg">
+              📂
             </div>
-            <div className="mt-5 flex items-baseline justify-between gap-4">
-              <h3 className="font-display text-2xl md:text-3xl">{p.title}</h3>
-              <span className="font-mono text-xs text-muted-foreground shrink-0">
-                {p.category} · {p.year}
-              </span>
-            </div>
-            <p className="mt-2 text-muted-foreground max-w-lg">{p.description}</p>
-            <ul className="mt-3 flex flex-wrap gap-x-2 gap-y-1">
-              {p.stack.map((s, idx) => (
-                <li key={s} className="text-[11px] font-mono text-muted-foreground flex items-center gap-2">
-                  {idx > 0 && <span className="text-muted-foreground/40">·</span>}
-                  {s}
-                </li>
-              ))}
-            </ul>
-          </button>
-        ))}
-      </div>
-
-      {/* Modal / Lightbox */}
-      {active && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/70 backdrop-blur-sm p-4 md:p-10 animate-in fade-in duration-300"
-          onClick={() => setActive(null)}
-        >
-          <div
-            className="relative w-full max-w-5xl overflow-hidden rounded-lg bg-background shadow-lift animate-in zoom-in-95 duration-300"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setActive(null)}
-              aria-label="Close"
-              className="absolute right-4 top-4 z-10 grid h-10 w-10 place-items-center rounded-full bg-background/90 backdrop-blur border border-border hover:bg-accent hover:text-accent-foreground transition"
-            >
-              ✕
-            </button>
-            <img src={active.image} alt={active.title} className="w-full max-h-[65vh] object-cover" />
-            <div className="p-6 md:p-10">
-              <div className="flex flex-wrap items-baseline justify-between gap-3">
-                <h2 className="font-display text-3xl md:text-4xl">{active.title}</h2>
-                <span className="font-mono text-xs text-muted-foreground">
-                  {active.category} · {active.year}
-                </span>
-              </div>
-              <p className="mt-4 text-lg text-foreground/85 max-w-2xl">{active.description}</p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {active.stack.map((s) => (
-                  <span key={s} className="rounded-full border border-border px-3 py-1 text-xs font-mono">{s}</span>
-                ))}
-              </div>
-              <a href={active.link} target="_blank" rel="noreferrer" className="btn-primary mt-8">
-                Visit project <span aria-hidden>→</span>
-              </a>
-            </div>
+            <h3 className="text-base font-semibold text-foreground">No projects found</h3>
+            <p className="mt-1 text-sm text-muted-foreground max-w-sm mx-auto">
+              There are currently no projects listed in the &ldquo;{filter}&rdquo; category.
+            </p>
+            {filter !== "All" && (
+              <button
+                onClick={() => setFilter("All")}
+                className="btn-ghost text-xs mt-5 cursor-pointer"
+              >
+                View all projects
+              </button>
+            )}
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {shown.map((p) => (
+              <article
+                key={p.id}
+                className="flex flex-col justify-between rounded-xl border border-border bg-surface p-6 transition-all duration-200 hover:border-foreground/40 hover:shadow-card shadow-xs group"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-3 mb-4">
+                    <span className="rounded-md border border-border/80 bg-background px-2.5 py-1 text-[10px] font-mono font-medium uppercase tracking-wider text-accent">
+                      {p.category}
+                    </span>
+                    <span className="font-mono text-xs text-muted-foreground">
+                      {p.year}
+                    </span>
+                  </div>
+
+                  <h2 className="text-xl font-semibold text-foreground group-hover:text-accent transition-colors">
+                    {p.title}
+                  </h2>
+
+                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                    {p.description}
+                  </p>
+                </div>
+
+                <div className="mt-6 border-t border-border/70 pt-5">
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {p.stack.map((s) => (
+                      <span
+                        key={s}
+                        className="rounded-md bg-muted px-2 py-0.5 text-[11px] font-mono text-foreground/80"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div>
+                    {p.linkType === "github" ? (
+                      <a
+                        href={p.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn-primary w-full text-xs"
+                      >
+                        <svg className="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24">
+                          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                        </svg>
+                        <span>View Repository ↗</span>
+                      </a>
+                    ) : (
+                      <a
+                        href={p.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn-primary w-full text-xs"
+                      >
+                        <span>Open Document (PDF) ↓</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
+
